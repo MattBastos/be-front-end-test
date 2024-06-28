@@ -1,4 +1,5 @@
 import { Body } from "@/components/Body";
+import { Header } from "@/components/Header";
 import { Layout } from "@/components/Layout";
 import type { Metadata } from "next";
 import "./globals.css";
@@ -16,6 +17,8 @@ export default function RootLayout({
   return (
     <html lang="pt-br" className="scroll-smooth">
       <Body>
+        <Header />
+
         <Layout>
           {children}
         </Layout>

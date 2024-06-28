@@ -9,6 +9,8 @@ export const MainContainer = tw.figure`
   justify-center
   object-cover
   overflow-hidden
+  w-[44px]
+  h-[34px]
 `;
 
 export const Logo = tw(Image)`
