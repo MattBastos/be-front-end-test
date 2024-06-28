@@ -3,6 +3,8 @@ import tw from "tailwind-styled-components";
 
 export const MainContainer = tw.section`
   w-full
+  sm:w-[60%]
+  relative
   flex
   items-center
   justify-center
@@ -26,7 +28,7 @@ export const SearchInput = tw.input`
 
 export const Icon = tw(Image)`
   absolute
-  right-8
+  right-4
   w-6
   h-6
 `;
