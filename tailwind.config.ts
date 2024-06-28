@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         gradientLightPrimary: '#5A84C0',
-        gradientDartPrimary: '#594Ed2',
+        gradientDarkPrimary: '#594Ed2',
         neutralBlack: '#1C1C1C',
         neutralWhite: '#FFFFFF',
         lightGray: '#F0F0F0',
