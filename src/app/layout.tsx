@@ -1,3 +1,4 @@
+import { Body } from "@/components/Body";
 import type { Metadata } from "next";
 import "./globals.css";
 
@@ -12,8 +13,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
-      <body>{children}</body>
+    <html lang="pt-br" className="scroll-smooth">
+      <Body>
+        {children}
+      </Body>
     </html>
   );
 }
