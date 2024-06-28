@@ -9,4 +9,6 @@ export const MainContainer = tw.section`
   h-full
   w-[92%]
   sm:w-[94%]
+  my-[75px]
+  sm:my-[95px]
 `;
