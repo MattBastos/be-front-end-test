@@ -20,51 +20,48 @@ export const TitleAndSearchContainer = tw.section`
 
 export const Title = tw.h1`
   w-full
-  text-h1
   mb-4
+  text-[24px]
+  font-medium
   text-neutralBlack
 `;
 
 export const Table = tw.table`
   w-full
   rounded-t-lg
-  shadow-smallShadow
+  overflow-hidden
   bg-neutralWhite
+  shadow-smallShadow
 `;
 
-export const THead = tw.thead`  
-  text-neutralWhite
-  rounded-t-lg
-  border-b
+export const THead = tw.thead`
+  h-[47px]
   bg-gradient-to-b
   from-gradientLightPrimary
   to-gradientDarkPrimary
 `;
 
 export const TH = tw.th`
-  text-h2
-  font-light
-  p-2
-  sm:py-3
-  sm:px-4
+  px-6
   text-start
-  text-sm
-  sm:text-base
-  md:text-lg
+  text-base
+  uppercase
+  font-medium
+  leading-[18.75px]
+  text-neutralWhite
 `;
 
-export const TBodyRow = tw.tr`
+export const TR = tw.tr`
+  h-[49px]
+  text-base
+  font-normal
+  leading-[18.75px]
   border-b
-  text-start
+  bg-neutralWhite
+  shadow-smallShadow
 `;
 
 export const TD = tw.td`
-  p-2
-  sm:py-3
-  sm:px-4
-  text-sm
-  sm:text-base
-  md:text-lg
-  text-start
+  px-6
   text-neutralBlack
 `;

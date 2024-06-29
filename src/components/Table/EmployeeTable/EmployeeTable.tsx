@@ -16,15 +16,29 @@ export const EmployeeTable = () => {
     "Telefone",
   ];
 
-  const mobileTableColumns = [
+  /*const mobileTableColumns = [
     "Foto",
     "Nome",
     "•",
-  ];
+  ];*/
 
   const mockedEmployee = [
     {
-      image: "/assets/images/icons/search.png",
+      image: "/assets",
+      name: "Giovana L. Arruda",
+      role: "Front-end",
+      date: "00/00/0000",
+      phoneNumber: "+55 (55) 55555-5555"
+    },
+    {
+      image: "/assets",
+      name: "Giovana L. Arruda",
+      role: "Front-end",
+      date: "00/00/0000",
+      phoneNumber: "+55 (55) 55555-5555"
+    },
+    {
+      image: "/assets",
       name: "Giovana L. Arruda",
       role: "Front-end",
       date: "00/00/0000",
@@ -47,6 +61,7 @@ export const EmployeeTable = () => {
         />
       </S.TitleAndSearchContainer>
 
+
       <S.Table>
         <S.THead>
           <tr>
@@ -60,7 +75,7 @@ export const EmployeeTable = () => {
 
         <tbody>
           {mockedEmployee.length > 0 && mockedEmployee.map((employee) => (
-            <S.TBodyRow key={employee.name}>
+            <S.TR key={employee.name}>
               <S.TD>
                 <span>{employee.image}</span>
               </S.TD>
@@ -76,7 +91,7 @@ export const EmployeeTable = () => {
               <S.TD>
                 <span>{employee.phoneNumber}</span>
               </S.TD>
-            </S.TBodyRow>
+            </S.TR>
           ))}
         </tbody>
       </S.Table>

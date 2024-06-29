@@ -5,5 +5,5 @@ export const MainContainer = tw.body`
   min-h-screen
   flex
   flex-col
-  bg-neutralWhite
+  bg-lightGray
 `;
