@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import tw from "tailwind-styled-components";
 
 export const MainContainer = tw.section`
@@ -67,6 +68,16 @@ export const TR = tw.tr`
 `;
 
 export const TD = tw.td`
+  relative
   px-6
   text-neutralBlack
+`;
+
+export const Icon = tw(Image)`
+  absolute
+  top-2
+  right-3
+  w-8
+  h-8
+  cursor-pointer
 `;

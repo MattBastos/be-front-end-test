@@ -25,8 +25,8 @@ export const SearchInput = ({
 
       <S.Icon
         src={'/assets/images/icons/search.png'}
-        alt='Logo'
-        title='Logo'
+        alt='Search Icon'
+        title='Search Icon'
         height={500}
         width={500}
         priority
