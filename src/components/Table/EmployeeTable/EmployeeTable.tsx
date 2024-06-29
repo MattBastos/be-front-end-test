@@ -16,29 +16,23 @@ export const EmployeeTable = () => {
     "Telefone",
   ];
 
-  const mobileTableColumns = [
-    "Foto",
-    "Nome",
-    "•",
-  ];
-
   const mockedEmployee = [
     {
-      image: "/assets",
+      image: "/",
       name: "Giovana L. Arruda",
       role: "Front-end",
       date: "00/00/0000",
       phoneNumber: "+55 (55) 55555-5555"
     },
     {
-      image: "/assets",
+      image: "/",
       name: "Vanessa Machado",
       role: "Back-end",
       date: "00/00/0000",
       phoneNumber: "+55 (55) 85921-5555"
     },
     {
-      image: "/assets",
+      image: "/",
       name: "Juliana Borba",
       role: "Front-end",
       date: "00/00/0000",
@@ -72,13 +66,16 @@ export const EmployeeTable = () => {
       </S.TitleAndSearchContainer>
 
       <S.Table>
+
         <S.THead>
           <tr>
-            {webTableColumns.map((column) => (
-              <S.TH key={column}>
+            {webTableColumns.map((column, index) => (
+              <S.TH key={column} className={index >= 2 ? 'hidden sm:table-cell' : ''}>
                 {column}
               </S.TH>
             ))}
+
+            <S.TH className="sm:hidden text-2xl">•</S.TH>
           </tr>
         </S.THead>
 
@@ -88,17 +85,25 @@ export const EmployeeTable = () => {
               <S.TD>
                 <span>{employee.image}</span>
               </S.TD>
+
               <S.TD>
                 <span>{employee.name}</span>
               </S.TD>
-              <S.TD>
+
+              <S.TD className="hidden sm:table-cell">
                 <span>{employee.role}</span>
               </S.TD>
-              <S.TD>
+
+              <S.TD className="hidden sm:table-cell">
                 <span>{employee.date}</span>
               </S.TD>
-              <S.TD>
+
+              <S.TD className="hidden sm:table-cell">
                 <span>{employee.phoneNumber}</span>
+              </S.TD>
+
+              <S.TD className="sm:hidden">
+                <button>I</button>
               </S.TD>
             </S.TR>
           ))}

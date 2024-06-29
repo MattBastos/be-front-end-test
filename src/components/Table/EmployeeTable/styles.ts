@@ -45,7 +45,8 @@ export const THead = tw.thead`
 
 export const TH = tw.th`
   px-6
-  text-start
+  text-center
+  sm:text-start
   text-base
   uppercase
   font-medium
@@ -56,6 +57,8 @@ export const TH = tw.th`
 export const TR = tw.tr`
   h-[49px]
   text-base
+  text-center
+  sm:text-start
   font-normal
   leading-[18.75px]
   border-b
