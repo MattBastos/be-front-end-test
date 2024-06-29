@@ -10,7 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         gradientLightPrimary: '#5A84C0',
-        gradientDartPrimary: '#594Ed2',
+        gradientDarkPrimary: '#594Ed2',
         neutralBlack: '#1C1C1C',
         neutralWhite: '#FFFFFF',
         lightGray: '#F0F0F0',
@@ -19,11 +19,6 @@ const config: Config = {
       },
       fontFamily: {
         sans: ['Roboto', 'sans-serif'],
-      },
-      fontSize: {
-        h1: ['24px', { lineHeight: '32px', fontWeight: '500' }],
-        h2: ['16px', { lineHeight: '24px', fontWeight: '500' }],
-        h3: ['16px', { lineHeight: '24px', fontWeight: '400' }],
       },
       boxShadow: {
         smallShadow: '0px 1px 2px rgba(0, 0, 0, 0.2)',

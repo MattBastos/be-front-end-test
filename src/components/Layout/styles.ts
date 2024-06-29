@@ -7,6 +7,8 @@ export const MainContainer = tw.section`
   items-center
   justify-center
   h-full
-  w-[92%]
+  w-[90%]
   sm:w-[94%]
+  my-[75px]
+  sm:my-[95px]
 `;
