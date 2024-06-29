@@ -16,11 +16,11 @@ export const EmployeeTable = () => {
     "Telefone",
   ];
 
-  /*const mobileTableColumns = [
+  const mobileTableColumns = [
     "Foto",
     "Nome",
     "•",
-  ];*/
+  ];
 
   const mockedEmployee = [
     {
@@ -32,19 +32,29 @@ export const EmployeeTable = () => {
     },
     {
       image: "/assets",
-      name: "Giovana L. Arruda",
-      role: "Front-end",
+      name: "Vanessa Machado",
+      role: "Back-end",
       date: "00/00/0000",
-      phoneNumber: "+55 (55) 55555-5555"
+      phoneNumber: "+55 (55) 85921-5555"
     },
     {
       image: "/assets",
-      name: "Giovana L. Arruda",
+      name: "Juliana Borba",
       role: "Front-end",
       date: "00/00/0000",
-      phoneNumber: "+55 (55) 55555-5555"
+      phoneNumber: "+55 (55) 88921-5555"
     }
   ]
+
+  const filteredEmployees = mockedEmployee.filter((employee) => {
+    const searchRegex = new RegExp(searchTerm, "i");
+
+    return (
+      searchRegex.test(employee.name) ||
+      searchRegex.test(employee.phoneNumber) ||
+      searchRegex.test(employee.role)
+    );
+  });
 
   const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -61,7 +71,6 @@ export const EmployeeTable = () => {
         />
       </S.TitleAndSearchContainer>
 
-
       <S.Table>
         <S.THead>
           <tr>
@@ -74,7 +83,7 @@ export const EmployeeTable = () => {
         </S.THead>
 
         <tbody>
-          {mockedEmployee.length > 0 && mockedEmployee.map((employee) => (
+          {filteredEmployees.length > 0 && filteredEmployees.map((employee) => (
             <S.TR key={employee.name}>
               <S.TD>
                 <span>{employee.image}</span>

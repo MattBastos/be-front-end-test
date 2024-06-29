@@ -15,12 +15,14 @@ export const TitleAndSearchContainer = tw.section`
   sm:flex-row
   items-center
   justify-between
-  mb-4
+  mb-8
 `;
 
 export const Title = tw.h1`
   w-full
+  flex
   mb-4
+  sm:mb-0
   text-[24px]
   font-medium
   text-neutralBlack

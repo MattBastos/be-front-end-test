@@ -3,7 +3,8 @@ import tw from "tailwind-styled-components";
 
 export const MainContainer = tw.section`
   w-full
-  sm:w-[60%]
+  sm:w-[287px]
+  gap-40
   relative
   flex
   items-center
@@ -19,6 +20,9 @@ export const SearchInput = tw.input`
   h-12
   py-3
   px-4
+  text-base
+  font-normal
+  leading-[18.75px]
   border
   rounded-lg
   bg-neutralWhite
