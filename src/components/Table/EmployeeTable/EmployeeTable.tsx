@@ -8,7 +8,7 @@ import *  as S from './styles';
 export const EmployeeTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
-  const webTableColumns = [
+  const tableColumns = [
     "Foto",
     "Nome",
     "Cargo",
@@ -69,13 +69,13 @@ export const EmployeeTable = () => {
 
         <S.THead>
           <tr>
-            {webTableColumns.map((column, index) => (
+            {tableColumns.map((column, index) => (
               <S.TH key={column} className={index >= 2 ? 'hidden sm:table-cell' : ''}>
                 {column}
               </S.TH>
             ))}
 
-            <S.TH className="sm:hidden text-2xl">•</S.TH>
+            <S.TH className="sm:hidden text-4xl">•</S.TH>
           </tr>
         </S.THead>
 
