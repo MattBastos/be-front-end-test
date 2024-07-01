@@ -103,15 +103,17 @@ export const EmployeeTable = () => {
               </S.TD>
 
               <S.TD className="sm:hidden">
-                <S.Icon
-                  src={'/assets/images/icons/arrow-down.png'}
-                  alt='Arrow Down Icon'
-                  title='Arrow Down Icon'
-                  height={500}
-                  width={500}
-                  priority
-                  quality={100}
-                />
+                <S.IconContainer>
+                  <S.Icon
+                    src={'/assets/images/icons/arrow-down.png'}
+                    alt='Arrow Down Icon'
+                    title='Arrow Down Icon'
+                    height={500}
+                    width={500}
+                    priority
+                    quality={100}
+                  />
+                </S.IconContainer>
               </S.TD>
             </S.TR>
           ))}
