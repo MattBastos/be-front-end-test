@@ -56,6 +56,7 @@ export const TH = tw.th`
 `;
 
 export const TR = tw.tr`
+  relative
   h-[49px]
   text-base
   text-center
@@ -85,4 +86,19 @@ export const Icon = tw(Image)`
   w-8
   h-8
   cursor-pointer
+`;
+
+export const EmployeeDetailContainer = tw.section`
+  flex
+  items-center
+  justify-between
+  mb-4
+  border-b
+  border-dotted
+  border-midGray
+`;
+
+export const EmployeeDetailTitle = tw.h2`
+  font-medium
+  text-neutralBlack
 `;
