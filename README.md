@@ -1,36 +1,124 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Be Front-End Test
 
-## Getting Started
+## Sobre o Projeto
+Este projeto faz parte de um desafio para um processo seletivo e consiste em uma página responsiva que exibe uma tabela com informações dos funcionários, incluindo nome, cargo, data de admissão, telefone e imagem. A página possui um campo de pesquisa que permite filtrar os funcionários em tempo real enquanto o usuário digita, sem a necessidade de realizar novas requisições.
 
-First, run the development server:
+## Tecnologias Utilizadas
+
+- Node.js
+- npm
+- TypeScript
+- Next.js
+- React
+- Tailwind CSS
+- Tailwind Styled Components
+- json-server (para simular uma API)
+
+## Instruções para Rodar a Aplicação
+### Requisitos
+- Git
+- Node.js
+- npm
+
+### Passos para Rodar a Aplicação
+1. Instalar as Dependências: Após clonar o repositório, na raiz do projeto, execute o comando abaixo para instalar as dependências necessárias:
+
+```bash
+npm install
+```
+
+2. Rodar o Frontend: Para iniciar o servidor de desenvolvimento do frontend na porta 3000, execute o comando abaixo na raiz do projeto:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+- URL: http://localhost:3000
+
+3. Rodar o Backend: Para iniciar o servidor do json-server e simular a API, navegue até o diretório src/data e execute o comando abaixo:
+
+```bash
+npx json-server --watch db.json --port 3001
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Requisições
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### GET /employees
+Este endpoint retorna a lista de todos os funcionários.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- URL: http://localhost:3001/employees
+- Método HTTP: GET
+- Resposta de Sucesso:
+  
+```
+  [
+    {
+      "id": 1,
+      "name": "João",
+      "job": "Back-end",
+      "admission_date": "2019-12-02T00:00:00.000Z",
+      "phone": "5551234567890",
+      "image": "https://img.favpng.com/25/7/23/computer-icons-user-profile-avatar-image-png-favpng-LFqDyLRhe3PBXM0sx2LufsGFU.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Roberto",
+      "job": "Front-end",
+      "admission_date": "2020-03-12T00:00:00.000Z",
+      "phone": "5550321654789",
+      "image": "https://e7.pngegg.com/pngimages/550/997/png-clipart-user-icon-foreigners-avatar-child-face.png"
+    },
+    // Outros funcionários...
+  ]
+```
 
-## Learn More
+Caso ocorra algum erro na requisição, uma mensagem será exibida no topo da página. Em caso de sucesso, os dados dos funcionários serão exibidos na tabela.
 
-To learn more about Next.js, take a look at the following resources:
+## Funções Utilitárias
+As funções utilitárias formatDate e formatPhoneNumber são usadas para formatar datas e números de telefone. Elas estão localizadas no diretório src/utils.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### formatDate
+Esta função formata uma string ISO de data para o formato dd/mm/yyyy.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Assinatura
+```
+export const formatDate = (isoString: string | undefined) => string;
+```
 
-## Deploy on Vercel
+- Parâmetro
+  - isoString (string | undefined): A string ISO que representa a data. Pode ser undefined.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Retorno
+  - Uma string formatada como dd/mm/yyyy. Retorna uma string vazia se isoString for undefined.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Exemplo de Uso
+```
+import { formatDate } from './utils';
+
+const formattedDate = formatDate('2019-12-02T00:00:00.000Z');
+console.log(formattedDate); // Saída: 02/12/2019
+```
+
+### formatPhoneNumber
+Esta função formata um número de telefone em um padrão internacional com código do país, DDD e número.
+
+- Assinatura
+```
+export const formatPhoneNumber = (phoneNumber: string) => string;
+```
+
+- Parâmetros
+  - phoneNumber (string): A string que representa o número de telefone.
+
+- Retorno
+  - Uma string formatada como +55 (55) 55555-5555.
+
+- Exemplo de Uso
+```
+import { formatPhoneNumber } from './utils';
+
+const formattedPhone = formatPhoneNumber('5551234567890');
+console.log(formattedPhone); // Saída: +55 (51) 23456-7890
+```
+
+## Conclusão
+Este projeto é uma aplicação simples e eficaz para exibir informações de funcionários, utilizando um conjunto moderno de tecnologias como Node.js, React, Next.js, TypeScript, Tailwind CSS e json-server. Ele demonstra a integração entre frontend e backend, além de oferecer uma experiência de usuário responsiva e dinâmica.
