@@ -21,20 +21,25 @@ Este projeto faz parte de um desafio para um processo seletivo e consiste em uma
 - npm
 
 ### Passos para Rodar a Aplicação
-1. Instalar as Dependências: Após clonar o repositório, na raiz do projeto, execute o comando abaixo para instalar as dependências necessárias:
+1. Clonar o Projeto:
+```bash
+git clone git@github.com:MattBastos/be-front-end-test.git
+```
+
+2. Instalar as Dependências: Após clonar o repositório, na raiz do projeto, execute o comando abaixo para instalar as dependências necessárias:
 
 ```bash
 npm install
 ```
 
-2. Rodar o Frontend: Para iniciar o servidor de desenvolvimento do frontend na porta 3000, execute o comando abaixo na raiz do projeto:
+3. Rodar o Frontend: Para iniciar o servidor de desenvolvimento do frontend na porta 3000, execute o comando abaixo na raiz do projeto:
 
 ```bash
 npm run dev
 ```
 - URL: http://localhost:3000
 
-3. Rodar o Backend: Para iniciar o servidor do json-server e simular a API, navegue até o diretório src/data e execute o comando abaixo:
+4. Rodar o Backend: Para iniciar o servidor do json-server e simular a API, navegue até o diretório src/data e execute o comando abaixo:
 
 ```bash
 npx json-server --watch db.json --port 3001
