@@ -22,6 +22,7 @@ Este projeto faz parte de um desafio para um processo seletivo e consiste em uma
 
 ### Passos para Rodar a Aplicação
 1. Clonar o Projeto:
+
 ```bash
 git clone git@github.com:MattBastos/be-front-end-test.git
 ```
