@@ -3,7 +3,7 @@
 import { SearchInput } from "@/components/SearchInput"
 import { Employee } from "@/types";
 import { formatDate, formatPhoneNumber } from "@/utils";
-import { ChangeEvent, useState, Fragment, useEffect } from "react";
+import { ChangeEvent, useState, Fragment, useEffect, useCallback } from "react";
 
 import *  as S from './styles';
 
@@ -38,12 +38,16 @@ export const EmployeeTable = () => {
     setSelectedEmployeeId(selectedEmployeeId === id ? null : id);
   }
 
-  useEffect(() => {
+  const fetchEmployees = useCallback(() => {
     fetch('http://localhost:3001/employees')
       .then(response => response.json())
       .then(data => setEmployees(data))
       .catch(error => console.error('Erro ao buscar dados: ', error));
   }, []);
+
+  useEffect(() => {
+    fetchEmployees();
+  }, [fetchEmployees]);
 
   return (
     <S.MainContainer>
