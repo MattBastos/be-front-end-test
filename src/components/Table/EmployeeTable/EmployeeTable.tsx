@@ -1,12 +1,15 @@
 'use client';
 
 import { SearchInput } from "@/components/SearchInput"
-import { ChangeEvent, useState, Fragment } from "react";
+import { Employee } from "@/types";
+import Image from 'next/image';
+import { ChangeEvent, useState, Fragment, useEffect } from "react";
 
 import *  as S from './styles';
 
 export const EmployeeTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [employees, setEmployees] = useState<Employee[]>([]);
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
 
   const tableColumns = [
@@ -17,40 +20,13 @@ export const EmployeeTable = () => {
     "Telefone",
   ];
 
-  const mockedEmployee = [
-    {
-      id: 1,
-      image: "/",
-      name: "Giovana L. Arruda",
-      role: "Front-end",
-      date: "00/00/0000",
-      phoneNumber: "+55 (55) 55555-5555"
-    },
-    {
-      id: 2,
-      image: "/",
-      name: "Vanessa Machado",
-      role: "Back-end",
-      date: "00/00/0000",
-      phoneNumber: "+55 (55) 85921-5555"
-    },
-    {
-      id: 3,
-      image: "/",
-      name: "Juliana Borba",
-      role: "Front-end",
-      date: "00/00/0000",
-      phoneNumber: "+55 (55) 88921-5555"
-    }
-  ]
-
-  const filteredEmployees = mockedEmployee.filter((employee) => {
+  const filteredEmployees = employees.filter((employee) => {
     const searchRegex = new RegExp(searchTerm, "i");
 
     return (
       searchRegex.test(employee.name) ||
-      searchRegex.test(employee.phoneNumber) ||
-      searchRegex.test(employee.role)
+      searchRegex.test(employee.phone) ||
+      searchRegex.test(employee.job)
     );
   });
 
@@ -61,6 +37,13 @@ export const EmployeeTable = () => {
   const toggleEmployeeDetails = (id: number) => {
     setSelectedEmployeeId(selectedEmployeeId === id ? null : id);
   }
+
+  useEffect(() => {
+    fetch('http://localhost:3001/employees')
+      .then(response => response.json())
+      .then(data => setEmployees(data))
+      .catch(error => console.error('Erro ao buscar dados: ', error));
+  }, []);
 
   return (
     <S.MainContainer>
@@ -91,7 +74,16 @@ export const EmployeeTable = () => {
             <Fragment key={employee.name}>
               <S.TR className={selectedEmployeeId === employee.id ? 'border-0' : ''}>
                 <S.TD>
-                  <span>{employee.image}</span>
+                  <Image
+                    src={employee.image}
+                    alt={`Imagem do(a) ${employee.name}`}
+                    title={`Imagem do(a) ${employee.name}`}
+                    height={500}
+                    width={500}
+                    priority
+                    quality={100}
+                    className="h-10 w-10 rounded-full"
+                  />
                 </S.TD>
 
                 <S.TD>
@@ -99,15 +91,15 @@ export const EmployeeTable = () => {
                 </S.TD>
 
                 <S.TD className="hidden sm:table-cell">
-                  <span>{employee.role}</span>
+                  <span>{employee.job}</span>
                 </S.TD>
 
                 <S.TD className="hidden sm:table-cell">
-                  <span>{employee.date}</span>
+                  <span>{employee.admission_date}</span>
                 </S.TD>
 
                 <S.TD className="hidden sm:table-cell">
-                  <span>{employee.phoneNumber}</span>
+                  <span>{employee.phone}</span>
                 </S.TD>
 
                 <S.TD className="sm:hidden">
@@ -130,17 +122,17 @@ export const EmployeeTable = () => {
                   <S.TD colSpan={3} className="p-4">
                     <S.EmployeeDetailContainer>
                       <S.EmployeeDetailTitle>Cargo</S.EmployeeDetailTitle>
-                      <span>{employee.role}</span>
+                      <span>{employee.job}</span>
                     </S.EmployeeDetailContainer>
 
                     <S.EmployeeDetailContainer>
                       <S.EmployeeDetailTitle>Data de admissão</S.EmployeeDetailTitle>
-                      <span>{employee.date}</span>
+                      <span>{employee.admission_date}</span>
                     </S.EmployeeDetailContainer>
 
                     <S.EmployeeDetailContainer>
                       <S.EmployeeDetailTitle>Telefone</S.EmployeeDetailTitle>
-                      <span>{employee.phoneNumber}</span>
+                      <span>{employee.phone}</span>
                     </S.EmployeeDetailContainer>
                   </S.TD>
                 </S.TR>
