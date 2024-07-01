@@ -1,5 +1,6 @@
 'use client';
 
+import { Loading } from "@/components/Loading";
 import { SearchInput } from "@/components/SearchInput"
 import { Employee } from "@/types";
 import { formatDate, formatPhoneNumber } from "@/utils";
@@ -11,6 +12,7 @@ export const EmployeeTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   const tableColumns = [
     "Foto",
@@ -39,10 +41,14 @@ export const EmployeeTable = () => {
   }
 
   const fetchEmployees = useCallback(() => {
+    setIsLoading(true);
+
     fetch('http://localhost:3001/employees')
       .then(response => response.json())
       .then(data => setEmployees(data))
       .catch(error => console.error('Erro ao buscar dados: ', error));
+    
+    setIsLoading(false);
   }, []);
 
   useEffect(() => {
@@ -60,90 +66,94 @@ export const EmployeeTable = () => {
         />
       </S.TitleAndSearchContainer>
 
-      <S.Table>
-        <S.THead>
-          <tr>
-            {tableColumns.map((column, index) => (
-              <S.TH key={column} className={index >= 2 ? 'hidden sm:table-cell' : ''}>
-                {column}
-              </S.TH>
-            ))}
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <S.Table>
+          <S.THead>
+            <tr>
+              {tableColumns.map((column, index) => (
+                <S.TH key={column} className={index >= 2 ? 'hidden sm:table-cell' : ''}>
+                  {column}
+                </S.TH>
+              ))}
 
-            <S.TH className="sm:hidden text-4xl">•</S.TH>
-          </tr>
-        </S.THead>
+              <S.TH className="sm:hidden text-4xl">•</S.TH>
+            </tr>
+          </S.THead>
 
-        <tbody>
-          {filteredEmployees.length > 0 && filteredEmployees.map((employee) => (
-            <Fragment key={employee.name}>
-              <S.TR className={selectedEmployeeId === employee.id ? 'border-0' : ''}>
-                <S.TD>
-                  <S.EmployeeImage
-                    src={employee.image}
-                    alt={`Imagem do(a) ${employee.name}`}
-                    title={`Imagem do(a) ${employee.name}`}
-                    height={500}
-                    width={500}
-                    priority
-                    quality={100}
-                  />
-                </S.TD>
-
-                <S.TD>
-                  <span>{employee.name}</span>
-                </S.TD>
-
-                <S.TD className="hidden sm:table-cell">
-                  <span>{employee.job}</span>
-                </S.TD>
-
-                <S.TD className="hidden sm:table-cell">
-                  <span>{formatDate(employee.admission_date)}</span>
-                </S.TD>
-
-                <S.TD className="hidden sm:table-cell">
-                  <span>{formatPhoneNumber(employee.phone)}</span>
-                </S.TD>
-
-                <S.TD className="sm:hidden">
-                  <S.IconContainer onClick={() => toggleEmployeeDetails(employee.id)}>
-                    <S.Icon
-                      src={selectedEmployeeId === employee.id ? '/assets/images/icons/arrow-up.png' : '/assets/images/icons/arrow-down.png'}
-                      alt={selectedEmployeeId === employee.id ? 'Ícone de seta para cima' : 'Ícone de seta para baixo'}
-                      title={selectedEmployeeId === employee.id ? 'Recolher detalhes do funcionário' : 'Expandir detalhes do funcionário'}
+          <tbody>
+            {filteredEmployees.length > 0 && filteredEmployees.map((employee) => (
+              <Fragment key={employee.name}>
+                <S.TR className={selectedEmployeeId === employee.id ? 'border-0' : ''}>
+                  <S.TD>
+                    <S.EmployeeImage
+                      src={employee.image}
+                      alt={`Imagem do(a) ${employee.name}`}
+                      title={`Imagem do(a) ${employee.name}`}
                       height={500}
                       width={500}
                       priority
                       quality={100}
                     />
-                  </S.IconContainer>
-                </S.TD>
-              </S.TR>
+                  </S.TD>
 
-              {selectedEmployeeId === employee.id && (
-                <S.TR className="sm:hidden">
-                  <S.TD colSpan={3} className="p-4">
-                    <S.EmployeeDetailContainer>
-                      <S.EmployeeDetailTitle>Cargo</S.EmployeeDetailTitle>
-                      <span>{employee.job}</span>
-                    </S.EmployeeDetailContainer>
+                  <S.TD>
+                    <span>{employee.name}</span>
+                  </S.TD>
 
-                    <S.EmployeeDetailContainer>
-                      <S.EmployeeDetailTitle>Data de admissão</S.EmployeeDetailTitle>
-                      <span>{formatDate(employee.admission_date)}</span>
-                    </S.EmployeeDetailContainer>
+                  <S.TD className="hidden sm:table-cell">
+                    <span>{employee.job}</span>
+                  </S.TD>
 
-                    <S.EmployeeDetailContainer>
-                      <S.EmployeeDetailTitle>Telefone</S.EmployeeDetailTitle>
-                      <span>{formatPhoneNumber(employee.phone)}</span>
-                    </S.EmployeeDetailContainer>
+                  <S.TD className="hidden sm:table-cell">
+                    <span>{formatDate(employee.admission_date)}</span>
+                  </S.TD>
+
+                  <S.TD className="hidden sm:table-cell">
+                    <span>{formatPhoneNumber(employee.phone)}</span>
+                  </S.TD>
+
+                  <S.TD className="sm:hidden">
+                    <S.IconContainer onClick={() => toggleEmployeeDetails(employee.id)}>
+                      <S.Icon
+                        src={selectedEmployeeId === employee.id ? '/assets/images/icons/arrow-up.png' : '/assets/images/icons/arrow-down.png'}
+                        alt={selectedEmployeeId === employee.id ? 'Ícone de seta para cima' : 'Ícone de seta para baixo'}
+                        title={selectedEmployeeId === employee.id ? 'Recolher detalhes do funcionário' : 'Expandir detalhes do funcionário'}
+                        height={500}
+                        width={500}
+                        priority
+                        quality={100}
+                      />
+                    </S.IconContainer>
                   </S.TD>
                 </S.TR>
-              )}
-            </Fragment>
-          ))}
-        </tbody>
-      </S.Table>
+
+                {selectedEmployeeId === employee.id && (
+                  <S.TR className="sm:hidden">
+                    <S.TD colSpan={3} className="p-4">
+                      <S.EmployeeDetailContainer>
+                        <S.EmployeeDetailTitle>Cargo</S.EmployeeDetailTitle>
+                        <span>{employee.job}</span>
+                      </S.EmployeeDetailContainer>
+
+                      <S.EmployeeDetailContainer>
+                        <S.EmployeeDetailTitle>Data de admissão</S.EmployeeDetailTitle>
+                        <span>{formatDate(employee.admission_date)}</span>
+                      </S.EmployeeDetailContainer>
+
+                      <S.EmployeeDetailContainer>
+                        <S.EmployeeDetailTitle>Telefone</S.EmployeeDetailTitle>
+                        <span>{formatPhoneNumber(employee.phone)}</span>
+                      </S.EmployeeDetailContainer>
+                    </S.TD>
+                  </S.TR>
+                )}
+              </Fragment>
+            ))}
+          </tbody>
+        </S.Table>
+      )}
     </S.MainContainer>
   )
 }
