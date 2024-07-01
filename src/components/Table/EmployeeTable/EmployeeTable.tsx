@@ -2,7 +2,7 @@
 
 import { SearchInput } from "@/components/SearchInput"
 import { Employee } from "@/types";
-import { formatDate } from "@/utils";
+import { formatDate, formatPhoneNumber } from "@/utils";
 import Image from 'next/image';
 import { ChangeEvent, useState, Fragment, useEffect } from "react";
 
@@ -100,7 +100,7 @@ export const EmployeeTable = () => {
                 </S.TD>
 
                 <S.TD className="hidden sm:table-cell">
-                  <span>{employee.phone}</span>
+                  <span>{formatPhoneNumber(employee.phone)}</span>
                 </S.TD>
 
                 <S.TD className="sm:hidden">
@@ -133,7 +133,7 @@ export const EmployeeTable = () => {
 
                     <S.EmployeeDetailContainer>
                       <S.EmployeeDetailTitle>Telefone</S.EmployeeDetailTitle>
-                      <span>{employee.phone}</span>
+                      <span>{formatPhoneNumber(employee.phone)}</span>
                     </S.EmployeeDetailContainer>
                   </S.TD>
                 </S.TR>
