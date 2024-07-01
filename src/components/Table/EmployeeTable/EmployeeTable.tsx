@@ -1,12 +1,13 @@
 'use client';
 
 import { SearchInput } from "@/components/SearchInput"
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, Fragment } from "react";
 
 import *  as S from './styles';
 
 export const EmployeeTable = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
 
   const tableColumns = [
     "Foto",
@@ -18,6 +19,7 @@ export const EmployeeTable = () => {
 
   const mockedEmployee = [
     {
+      id: 1,
       image: "/",
       name: "Giovana L. Arruda",
       role: "Front-end",
@@ -25,6 +27,7 @@ export const EmployeeTable = () => {
       phoneNumber: "+55 (55) 55555-5555"
     },
     {
+      id: 2,
       image: "/",
       name: "Vanessa Machado",
       role: "Back-end",
@@ -32,6 +35,7 @@ export const EmployeeTable = () => {
       phoneNumber: "+55 (55) 85921-5555"
     },
     {
+      id: 3,
       image: "/",
       name: "Juliana Borba",
       role: "Front-end",
@@ -54,6 +58,10 @@ export const EmployeeTable = () => {
     setSearchTerm(e.target.value);
   }
 
+  const toggleEmployeeDetails = (id: number) => {
+    setSelectedEmployeeId(selectedEmployeeId === id ? null : id);
+  }
+
   return (
     <S.MainContainer>
       <S.TitleAndSearchContainer>
@@ -66,7 +74,6 @@ export const EmployeeTable = () => {
       </S.TitleAndSearchContainer>
 
       <S.Table>
-
         <S.THead>
           <tr>
             {tableColumns.map((column, index) => (
@@ -81,41 +88,64 @@ export const EmployeeTable = () => {
 
         <tbody>
           {filteredEmployees.length > 0 && filteredEmployees.map((employee) => (
-            <S.TR key={employee.name}>
-              <S.TD>
-                <span>{employee.image}</span>
-              </S.TD>
+            <Fragment key={employee.name}>
+              <S.TR className={selectedEmployeeId === employee.id ? 'border-0' : ''}>
+                <S.TD>
+                  <span>{employee.image}</span>
+                </S.TD>
 
-              <S.TD>
-                <span>{employee.name}</span>
-              </S.TD>
+                <S.TD>
+                  <span>{employee.name}</span>
+                </S.TD>
 
-              <S.TD className="hidden sm:table-cell">
-                <span>{employee.role}</span>
-              </S.TD>
+                <S.TD className="hidden sm:table-cell">
+                  <span>{employee.role}</span>
+                </S.TD>
 
-              <S.TD className="hidden sm:table-cell">
-                <span>{employee.date}</span>
-              </S.TD>
+                <S.TD className="hidden sm:table-cell">
+                  <span>{employee.date}</span>
+                </S.TD>
 
-              <S.TD className="hidden sm:table-cell">
-                <span>{employee.phoneNumber}</span>
-              </S.TD>
+                <S.TD className="hidden sm:table-cell">
+                  <span>{employee.phoneNumber}</span>
+                </S.TD>
 
-              <S.TD className="sm:hidden">
-                <S.IconContainer>
-                  <S.Icon
-                    src={'/assets/images/icons/arrow-down.png'}
-                    alt='Arrow Down Icon'
-                    title='Arrow Down Icon'
-                    height={500}
-                    width={500}
-                    priority
-                    quality={100}
-                  />
-                </S.IconContainer>
-              </S.TD>
-            </S.TR>
+                <S.TD className="sm:hidden">
+                  <S.IconContainer onClick={() => toggleEmployeeDetails(employee.id)}>
+                    <S.Icon
+                      src={selectedEmployeeId === employee.id ? '/assets/images/icons/arrow-up.png' : '/assets/images/icons/arrow-down.png'}
+                      alt={selectedEmployeeId === employee.id ? 'Ícone de seta para cima' : 'Ícone de seta para baixo'}
+                      title={selectedEmployeeId === employee.id ? 'Recolher detalhes do funcionário' : 'Expandir detalhes do funcionário'}
+                      height={500}
+                      width={500}
+                      priority
+                      quality={100}
+                    />
+                  </S.IconContainer>
+                </S.TD>
+              </S.TR>
+
+              {selectedEmployeeId === employee.id && (
+                <S.TR className="sm:hidden">
+                  <S.TD colSpan={3} className="p-4">
+                    <S.EmployeeDetailContainer>
+                      <S.EmployeeDetailTitle>Cargo</S.EmployeeDetailTitle>
+                      <span>{employee.role}</span>
+                    </S.EmployeeDetailContainer>
+
+                    <S.EmployeeDetailContainer>
+                      <S.EmployeeDetailTitle>Data de admissão</S.EmployeeDetailTitle>
+                      <span>{employee.date}</span>
+                    </S.EmployeeDetailContainer>
+
+                    <S.EmployeeDetailContainer>
+                      <S.EmployeeDetailTitle>Telefone</S.EmployeeDetailTitle>
+                      <span>{employee.phoneNumber}</span>
+                    </S.EmployeeDetailContainer>
+                  </S.TD>
+                </S.TR>
+              )}
+            </Fragment>
           ))}
         </tbody>
       </S.Table>
