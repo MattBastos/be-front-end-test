@@ -2,6 +2,7 @@
 
 import { Loading } from "@/components/Loading";
 import { SearchInput } from "@/components/SearchInput"
+import { Toast } from "@/components/Toast";
 import { Employee } from "@/types";
 import { formatDate, formatPhoneNumber } from "@/utils";
 import { ChangeEvent, useState, Fragment, useEffect, useCallback } from "react";
@@ -9,10 +10,11 @@ import { ChangeEvent, useState, Fragment, useEffect, useCallback } from "react";
 import *  as S from './styles';
 
 export const EmployeeTable = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [selectedEmployeeId, setSelectedEmployeeId] = useState<number | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
+  const [showFeedbackMessage, setShowFeedbackMessage] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const tableColumns = [
     "Foto",
@@ -49,6 +51,14 @@ export const EmployeeTable = () => {
 
       setEmployees(data);
     } catch (error) {
+      setIsLoading(false);
+
+      setShowFeedbackMessage(true);
+
+      setTimeout(() => {
+        setShowFeedbackMessage(false);
+      }, 3000);
+
       console.error('Erro ao buscar dados: ', error);
     } finally {
       setIsLoading(false);
@@ -157,6 +167,12 @@ export const EmployeeTable = () => {
             ))}
           </tbody>
         </S.Table>
+      )}
+
+      {showFeedbackMessage && (
+        <Toast
+          message={"Oops! Erro ao buscar dados dos funcionários!"}
+        />
       )}
     </S.MainContainer>
   )
