@@ -73,10 +73,15 @@ export const TD = tw.td`
   text-neutralBlack
 `;
 
+export const IconContainer = tw.section`
+  flex
+  items-center
+  justify-center
+  w-full
+  h-full
+`;
+
 export const Icon = tw(Image)`
-  absolute
-  top-2
-  right-3
   w-8
   h-8
   cursor-pointer
