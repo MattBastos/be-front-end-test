@@ -3,7 +3,6 @@
 import { SearchInput } from "@/components/SearchInput"
 import { Employee } from "@/types";
 import { formatDate, formatPhoneNumber } from "@/utils";
-import Image from 'next/image';
 import { ChangeEvent, useState, Fragment, useEffect } from "react";
 
 import *  as S from './styles';
@@ -75,7 +74,7 @@ export const EmployeeTable = () => {
             <Fragment key={employee.name}>
               <S.TR className={selectedEmployeeId === employee.id ? 'border-0' : ''}>
                 <S.TD>
-                  <Image
+                  <S.EmployeeImage
                     src={employee.image}
                     alt={`Imagem do(a) ${employee.name}`}
                     title={`Imagem do(a) ${employee.name}`}
@@ -83,7 +82,6 @@ export const EmployeeTable = () => {
                     width={500}
                     priority
                     quality={100}
-                    className="h-10 w-10 rounded-full"
                   />
                 </S.TD>
 
