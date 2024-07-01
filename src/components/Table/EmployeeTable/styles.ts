@@ -88,6 +88,14 @@ export const Icon = tw(Image)`
   cursor-pointer
 `;
 
+export const EmployeeImage = tw(Image)`
+  h-[32px]
+  w-[32px]
+  sm:h-[34px]
+  sm:w-[34px]
+  rounded-full
+`;
+
 export const EmployeeDetailContainer = tw.section`
   flex
   items-center
