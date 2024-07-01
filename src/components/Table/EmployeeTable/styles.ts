@@ -32,9 +32,11 @@ export const Title = tw.h1`
 export const Table = tw.table`
   w-full
   rounded-t-lg
+  rounded-b-[5px]
+  sm:rounded-b-none
   overflow-hidden
   bg-neutralWhite
-  shadow-smallShadow
+  sm:shadow-smallShadow
 `;
 
 export const THead = tw.thead`
