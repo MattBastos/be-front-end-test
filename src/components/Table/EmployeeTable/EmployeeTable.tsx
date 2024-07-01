@@ -40,15 +40,19 @@ export const EmployeeTable = () => {
     setSelectedEmployeeId(selectedEmployeeId === id ? null : id);
   }
 
-  const fetchEmployees = useCallback(() => {
+  const fetchEmployees = useCallback(async () => {
     setIsLoading(true);
 
-    fetch('http://localhost:3001/employees')
-      .then(response => response.json())
-      .then(data => setEmployees(data))
-      .catch(error => console.error('Erro ao buscar dados: ', error));
-    
-    setIsLoading(false);
+    try {
+      const response = await fetch('http://localhost:3001/employees');
+      const data = await response.json();
+
+      setEmployees(data);
+    } catch (error) {
+      console.error('Erro ao buscar dados: ', error);
+    } finally {
+      setIsLoading(false);
+    }
   }, []);
 
   useEffect(() => {
